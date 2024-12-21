@@ -150,22 +150,17 @@ export default function Home() {
                   <audio
                     ref={audioRef}
                     src="https://pagalfree.com/download/320-Sanam%20Teri%20Kasam%20-%20Sanam%20Teri%20Kasam%20320%20Kbps.mp3"
-                    preload="metadata"
+                    preload="auto"
                   />
                   <button
-                    onClick={async () => {
+                    onClick={() => {
                       if (audioRef.current) {
-                        try {
-                          if (isPlaying) {
-                            await audioRef.current.pause();
-                          } else {
-                            await audioRef.current.load(); // Force reload
-                            await audioRef.current.play();
-                          }
-                          setIsPlaying(!isPlaying);
-                        } catch (err) {
-                          console.error('Error playing audio:', err);
+                        if (isPlaying) {
+                          audioRef.current.pause();
+                        } else {
+                          audioRef.current.play();
                         }
+                        setIsPlaying(!isPlaying);
                       }
                     }}
                     className="flex items-center gap-2"
