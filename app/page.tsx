@@ -1,101 +1,227 @@
+"use client";
 import Image from "next/image";
+import Link from "next/link";
+import {
+  FaInstagram,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showImagePreview, setShowImagePreview] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const navLinks = [
+    { title: "Home", href: "#" },
+    { title: "About", href: "#about" },
+    { title: "Contact", href: "#contact" },
+  ];
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-zinc-900 flex flex-col">
+      {/* Navbar */}
+      <nav className="fixed w-full bg-gradient-to-r from-gray-950 to-slate-900 shadow-2xl z-50 backdrop-blur-md bg-opacity-95">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            <div className="flex-shrink-0">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight hover:text-purple-200 transition-colors duration-300">
+                Sandeep Gupta
+              </h1>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="block md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-white p-2 hover:bg-white/10 rounded-lg transition-all duration-300"
+              >
+                {isMenuOpen ? (
+                  <FaTimes className="h-6 w-6" />
+                ) : (
+                  <FaBars className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-center space-x-4 sm:space-x-8">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.title}
+                    href={link.href}
+                    className="text-white hover:text-purple-200 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:scale-105"
+                  >
+                    {link.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile menu dropdown */}
+          {isMenuOpen && (
+            <div className="md:hidden pb-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.title}
+                  href={link.href}
+                  className="block text-white hover:text-purple-200 px-4 py-2 rounded-lg text-base font-medium hover:bg-white/10"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.title}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </nav>
+
+      {/* Hero Section - Enhanced styling */}
+      <div className="pt-20 md:pt-24 px-4 sm:px-6">
+        <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 text-center">
+          <div className="grid gap-8 sm:gap-12 items-center">
+            <div className="space-y-8">
+              <div className="transform hover:scale-105 transition-transform duration-500">
+                <div 
+                  className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden border-4 border-slate-600 shadow-2xl hover:border-slate-400 transition-all duration-500 ring-4 ring-slate-800/50 cursor-pointer"
+                  onClick={() => setShowImagePreview(true)}
+                >
+                  <Image
+                    src="/logo.jpg"
+                    alt="Sandeep Gupta"
+                    width={200}
+                    height={200}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-100 tracking-tight drop-shadow-lg">
+                  Sandeep Gupta
+                </h1>
+
+                <div className="space-y-4 text-slate-300">
+                  <p className="font-medium text-xl sm:text-2xl text-red-500">
+                    🚩 JAI SHREE RAM 🚩
+                  </p>
+                  <p>
+                  🌏 Lîfè îs êãsy.😘Bút thë 🧑‍⚕️ Bøy is Bûsy...🤘
+                  </p>
+                  <p className="font-light text-lg sm:text-xl">
+                    World Entry 18_#Oçtõbêr_
+                  </p>
+                  <p className="text-xl sm:text-2xl md:text-3xl font-medium">
+                    🎧 Mûsîç ...Lõvër 🎵
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <Link
+                  href="https://instagram.com/mr_sandeep.6"
+                  className="inline-block px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 rounded-full text-slate-100 hover:from-slate-600 hover:to-slate-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl ring-2 ring-slate-600/50"
+                >
+                  <span className="flex items-center gap-2 text-base">
+                    Follow me
+                    <FaInstagram className="text-2xl sm:text-3xl text-pink-500" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Add Image Preview Modal */}
+      {showImagePreview && (
+        <div 
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowImagePreview(false)}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <div className="relative max-w-4xl max-h-[90vh] w-full">
+            <Image
+              src="/logo.jpg"
+              alt="Sandeep Gupta"
+              width={800}
+              height={800}
+              className="w-full h-full object-contain rounded-lg"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* About Section - Updated background */}
+      <section className="bg-gradient-to-r from-gray-950 to-slate-900 text-slate-100 py-16 sm:py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 backdrop-blur-sm bg-slate-900/30 rounded-xl p-8 shadow-xl">
+            <div className="space-y-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+                About Me
+              </h2>
+              <p className="text-lg sm:text-xl md:text-2xl">
+                I am human being who is trying to make a difference in the world.
+              </p>
+              <p className="text-lg sm:text-xl md:text-2xl">
+                I am a passionate individual who is constantly seeking opportunities to learn and grow.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+
+      {/* Footer - Updated styling */}
+      <footer className="bg-gradient-to-r from-gray-950 to-slate-900 text-slate-300 py-8 sm:py-10 mt-auto border-t border-slate-800">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-sm sm:text-base text-center md:text-left">
+              <p className="text-gray-300 hover:text-white transition-colors duration-300">
+                © {new Date().getFullYear()} Sandeep Gupta. All rights reserved.
+              </p>
+            </div>
+
+            <div className="flex justify-center space-x-6 sm:space-x-8">
+              {[
+                {
+                  Icon: FaInstagram,
+                  href: "https://instagram.com/mr_sandeep.6",
+                  color: "#E4405F",
+                },
+                {
+                  Icon: FaGithub,
+                  href: "https://github.com/yourusername",
+                  color: "#ffffff",
+                },
+                {
+                  Icon: FaLinkedin,
+                  href: "https://linkedin.com/in/yourusername",
+                  color: "#0A66C2",
+                },
+                {
+                  Icon: FaTwitter,
+                  href: "https://twitter.com/yourusername",
+                  color: "#1DA1F2",
+                },
+              ].map(({ Icon, href, color }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  className="hover:scale-110 transition-transform duration-300 hover:opacity-80"
+                >
+                  <Icon className="text-2xl" style={{ color }} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }
