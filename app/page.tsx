@@ -124,7 +124,7 @@ export default function Home() {
                     ❤️ Bihari 🚩
                   </p>
                   <TypeAnimation
-                    className=" font-bold text-white"
+                    className=" font-bold text-pink-500"
                     sequence={[
                      
                       1000, // wait 1s before replacing "Mice" with "Hamsters"
@@ -150,17 +150,22 @@ export default function Home() {
                   <audio
                     ref={audioRef}
                     src="https://pagalfree.com/download/320-Sanam%20Teri%20Kasam%20-%20Sanam%20Teri%20Kasam%20320%20Kbps.mp3"
-                    preload="auto"
+                    preload="metadata"
                   />
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       if (audioRef.current) {
-                        if (isPlaying) {
-                          audioRef.current.pause();
-                        } else {
-                          audioRef.current.play();
+                        try {
+                          if (isPlaying) {
+                            await audioRef.current.pause();
+                          } else {
+                            await audioRef.current.load(); // Force reload
+                            await audioRef.current.play();
+                          }
+                          setIsPlaying(!isPlaying);
+                        } catch (err) {
+                          console.error('Error playing audio:', err);
                         }
-                        setIsPlaying(!isPlaying);
                       }
                     }}
                     className="flex items-center gap-2"
