@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sandeep Gupta",
-  description: "Sandeep Gupta's personal website",
+  title: "Aarav Pandey",
+  description: "Aarav Pandey's personal website",
 };
 
 export default function RootLayout({
