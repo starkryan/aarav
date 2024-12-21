@@ -150,6 +150,7 @@ export default function Home() {
                   <audio
                     ref={audioRef}
                     src="https://pagalfree.com/download/320-Sanam%20Teri%20Kasam%20-%20Sanam%20Teri%20Kasam%20320%20Kbps.mp3"
+                    preload="auto"
                   />
                   <button
                     onClick={() => {
