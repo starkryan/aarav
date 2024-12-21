@@ -1,4 +1,5 @@
 "use client";
+import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,7 +13,6 @@ import {
   FaPause,
 } from "react-icons/fa";
 import { useState, useRef } from "react";
-
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -92,16 +92,25 @@ export default function Home() {
             <div className="space-y-8">
               <div className="transform hover:scale-105 transition-transform duration-500">
                 <div
-                  className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden border-4 border-slate-600 shadow-2xl hover:border-slate-400 transition-all duration-500 ring-4 ring-slate-800/50 cursor-pointer"
+                  className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden cursor-pointer"
                   onClick={() => setShowImagePreview(true)}
+                  style={{
+                    background:
+                      "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+                    padding: "4px",
+                  }}
                 >
-                  <Image
-                    src="/aarav.jpg"
-                    alt="Aarav Pandey"
-                    width={200}
-                    height={200}
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="w-full h-full rounded-full p-0.5 bg-slate-900">
+                    <div className="w-full h-full rounded-full overflow-hidden">
+                      <Image
+                        src="/aarav.jpg"
+                        alt="Aarav Pandey"
+                        width={200}
+                        height={200}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -114,24 +123,35 @@ export default function Home() {
                   <p className="font-medium text-xl sm:text-2xl text-red-500">
                     ❤️ Bihari 🚩
                   </p>
-                  <p>Pistanthrophobic🤡</p>
-                  <p className="font-light text-lg sm:text-xl">
-                    Nyctophile🖤🌚💫
-                  </p>
-                  <p className="text-xl sm:text-2xl md:text-3xl font-medium">
-                    Ethical Hacker 🔰
-                  </p>
-                  <p>🎓 JS University 🏠Durgapur</p>
+                  <TypeAnimation
+                    className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text"
+                    sequence={[
+                     
+                      1000, // wait 1s before replacing "Mice" with "Hamsters"
+                      "Pistanthrophobic🤡",
+                      1000,
+                      "Nyctophile🖤🌚💫",
+                      1000,
+                      "Ethical Hacker 🔰",
+                      1000,
+                    ]}
+                    wrapper="span"
+                    speed={50}
+                    style={{ fontSize: "2em", display: "inline-block" }}
+                    repeat={Infinity}
+                  />
+
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-pink-500">🎓 JS University 🏠Durgapur</p>
                 </div>
               </div>
               {/* Music */}
               <div className="flex flex-col items-center space-y-4">
                 <div className="flex items-center space-x-3 bg-gradient-to-r from-slate-700 to-slate-800 px-6 py-3 rounded-full text-slate-100 hover:from-slate-600 hover:to-slate-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl ring-2 ring-slate-600/50">
-                  <audio 
+                  <audio
                     ref={audioRef}
-                    src="https://pagalfree.com/download/320-Sanam%20Teri%20Kasam%20-%20Sanam%20Teri%20Kasam%20320%20Kbps.mp3" 
+                    src="https://pagalfree.com/download/320-Sanam%20Teri%20Kasam%20-%20Sanam%20Teri%20Kasam%20320%20Kbps.mp3"
                   />
-                  <button 
+                  <button
                     onClick={() => {
                       if (audioRef.current) {
                         if (isPlaying) {
@@ -145,7 +165,7 @@ export default function Home() {
                     className="flex items-center gap-2"
                   >
                     {!isPlaying ? (
-                      <FaPlay className="text-xl text-green-400" />
+                      <FaPlay className="text-xl text-pink-600" />
                     ) : (
                       <FaPause className="text-xl text-green-400" />
                     )}
@@ -194,8 +214,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 backdrop-blur-sm bg-slate-900/30 rounded-xl p-8 shadow-xl">
             <div className="space-y-4">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-                About Me
-                 ❤️
+                About Me ❤️
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl">
                 I am a pistanthrophobic 🤡, navigating life with caution but
@@ -214,22 +233,21 @@ export default function Home() {
         </div>
       </section>
 
-     
-{/* EDUCATION
- */}
-   <section className="bg-gradient-to-r from-gray-950 to-slate-900 text-slate-100 py-16 sm:py-20">
+      {/* EDUCATION
+       */}
+      <section className="bg-gradient-to-r from-gray-950 to-slate-900 text-slate-100 py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 backdrop-blur-sm bg-slate-900/30 rounded-xl p-8 shadow-xl">
             <div className="space-y-4">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-                Education
-                 ❤️
+                Education ❤️
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl">
-                 I have completed Diploma in Electrical Engineering.
+                I have completed Diploma in Electrical Engineering.
               </p>
               <p className="text-lg sm:text-xl md:text-2xl">
-                I am currently pursuing B.Tech in Computer Science and Engineering.
+                I am currently pursuing B.Tech in Computer Science and
+                Engineering.
               </p>
             </div>
           </div>
