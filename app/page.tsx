@@ -124,7 +124,7 @@ export default function Home() {
                     ❤️ Bihari 🚩
                   </p>
                   <TypeAnimation
-                    className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text"
+                    className=" font-bold text-white"
                     sequence={[
                      
                       1000, // wait 1s before replacing "Mice" with "Hamsters"
